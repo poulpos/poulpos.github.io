@@ -6,14 +6,8 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="./resources/ol.css">
-        <link rel="stylesheet" href="./resources/ol3-layerswitcher.css">
-        <link rel="stylesheet" href="./resources/qgis2web.css">
-        <style>
-        html, body {
-            background-color: #ffffff;
-        }
-        </style>
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -26,20 +20,177 @@
     </head>
     <body>
         <div id="map">
-            <div id="popup" class="ol-popup">
-                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                <div id="popup-content"></div>
-            </div>
         </div>
-        <script src="resources/qgis2web_expressions.js"></script>
-        <script src="resources/polyfills.js"></script>
-        <script src="./resources/functions.js"></script>
-        <script src="./resources/ol.js"></script>
-        <script src="./resources/ol3-layerswitcher.js"></script>
-        <script src="layers/parcours28022019_0.js"></script><script src="layers/pointscollects28022019_1.js"></script>
-        <script src="styles/parcours28022019_0_style.js"></script><script src="styles/pointscollects28022019_1_style.js"></script>
-        <script src="./layers/layers.js" type="text/javascript"></script> 
-        <script src="./resources/qgis2web.js"></script>
-        <script src="./resources/Autolinker.min.js"></script>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/180km_voie_routiere_2154_0.js"></script>
+        <script src="data/Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[48.8578662459,-2.71789963755],[51.0299685637,2.90628525784]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        function pop_180km_voie_routiere_2154_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_180km_voie_routiere_2154_0_0() {
+            return {
+                pane: 'pane_180km_voie_routiere_2154_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(30,194,44,0.6)',
+            }
+        }
+        map.createPane('pane_180km_voie_routiere_2154_0');
+        map.getPane('pane_180km_voie_routiere_2154_0').style.zIndex = 400;
+        map.getPane('pane_180km_voie_routiere_2154_0').style['mix-blend-mode'] = 'normal';
+        var layer_180km_voie_routiere_2154_0 = new L.geoJson(json_180km_voie_routiere_2154_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_180km_voie_routiere_2154_0',
+            onEachFeature: pop_180km_voie_routiere_2154_0,
+            style: style_180km_voie_routiere_2154_0_0,
+        });
+        bounds_group.addLayer(layer_180km_voie_routiere_2154_0);
+        map.addLayer(layer_180km_voie_routiere_2154_0);
+        function pop_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? Autolinker.link(String(feature.properties['description'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? Autolinker.link(String(feature.properties['timestamp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['begin'] !== null ? Autolinker.link(String(feature.properties['begin'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['end'] !== null ? Autolinker.link(String(feature.properties['end'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['altitudeMode'] !== null ? Autolinker.link(String(feature.properties['altitudeMode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tessellate'] !== null ? Autolinker.link(String(feature.properties['tessellate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['extrude'] !== null ? Autolinker.link(String(feature.properties['extrude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['visibility'] !== null ? Autolinker.link(String(feature.properties['visibility'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['drawOrder'] !== null ? Autolinker.link(String(feature.properties['drawOrder'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['icon'] !== null ? Autolinker.link(String(feature.properties['icon'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description_1'] !== null ? Autolinker.link(String(feature.properties['description_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Code_SINOE'] !== null ? Autolinker.link(String(feature.properties['Code_SINOE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nom_de_l_u'] !== null ? Autolinker.link(String(feature.properties['Nom_de_l_u'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Type'] !== null ? Autolinker.link(String(feature.properties['Type'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Num__ro'] !== null ? Autolinker.link(String(feature.properties['Num__ro'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Adresse'] !== null ? Autolinker.link(String(feature.properties['Adresse'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Commune'] !== null ? Autolinker.link(String(feature.properties['Commune'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lng'] !== null ? Autolinker.link(String(feature.properties['Lng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lat'] !== null ? Autolinker.link(String(feature.properties['Lat'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['180km'] !== null ? Autolinker.link(String(feature.properties['180km'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Localisation_pr__cise'] !== null ? Autolinker.link(String(feature.properties['Localisation_pr__cise'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KM_pr__cis'] !== null ? Autolinker.link(String(feature.properties['KM_pr__cis'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Autre_info'] !== null ? Autolinker.link(String(feature.properties['Autre_info'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1_0() {
+            return {
+                pane: 'pane_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,46,131,1.0)',
+            }
+        }
+        map.createPane('pane_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1');
+        map.getPane('pane_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1').style.zIndex = 401;
+        map.getPane('pane_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1').style['mix-blend-mode'] = 'normal';
+        var layer_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1 = new L.geoJson(json_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1',
+            onEachFeature: pop_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1);
+        map.addLayer(layer_Sites__localiser_prcisment2Sites__localiser_prcismentPoint_1);
+        setBounds();
+        </script>
     </body>
 </html>
